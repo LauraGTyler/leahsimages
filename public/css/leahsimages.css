@@ -1,0 +1,30 @@
+ #folders { list-style-type: none; margin: 2em; padding: 0; width: 100%; }
+#folders li { margin: 20px 20px 20px 0; padding: 1px;float:left;width: 20%; height: 200px; font-size: 3em; text-align:center;  background-image: url("/images/folder-silhouette.png");
+  background-repeat: no-repeat;
+  background-color: rgb(197, 197, 197);
+	    }
+#folders li:hover{border:10px solid black;}
+#folders:after{clear:left;}
+#images { list-style-type: none; margin: 2em; padding: 0; width: 100%; }
+#images li { margin: 20px 20px 20px 0; padding: 1px;float:left;width: 20%; height: 200px; font-size: 3em; text-align:center; }
+#images:after{clear:left;}
+#images li:hover{border:10px solid black;}
+#reorderfolders:hover{border:10px solid black;}
+#savefolderorder:hover{border:10px solid black;}
+#reorderimages:hover{border:10px solid black;}
+#addimagediv{margin-bottom:2em;}
+#addimage:hover{border:10px solid black;}
+p{clear:left;}
+h2{clear:left;}
+.modal-backdrop.in{
+    z-index: unset;
+}
+.grid { list-style-type: none;  margin-left:2em; margin-right:2em; padding: 0; width: 100%; }
+.grid li { margin: 0 10px 0 10px; float:left;width: 24%; height:170px; }
+.grid li img:hover {border:5px solid black; }
+.hidden{
+    display:none;
+}
+.center{text-align:center;}
+nav{ margin-left:2em;}
+form{ margin-left:2em;}
