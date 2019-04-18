@@ -1,4 +1,4 @@
-<h1 class="center">Leas Images:{{$title}}</h1>
+<h1 id="leasimagestitle" class="center">Leahs Images:{{$title}}</h1>
 @if(!empty($folder))
 <nav>
    @foreach($trail as $folder)

@@ -25,6 +25,27 @@ $(document).ready(function(){
     $('#caroselright').on('click',function(){
 	$('#myGallery').carousel("next");
     });
+    	$('.caroselimage').on('click',function(){
+	    srcatt=$(this).attr('src');
+	   // newsrc=srcatt.replace('thumb','large');
+	    idatt=$(this).attr('id');
+	    id=idatt.substr(5);
+	    title=$('#leasimagestitle').text();
+	    title=title.substr(13);
+	    $('#directoryimage').html('<div class="center"><img src="'+srcatt+'" alt="'+title+'" title="'+title+'" /></div>');
+	    $('#addimagediv a').text('Change associated folder image');
+	    $(this).closest('div.modal').modal('hide');
+	    
+	     $.ajax({
+                url: '/ajax/savedirectoryimage',
+                 data: 'imageid='+id,
+                success: function(result){
+        	    var res = $.parseJSON(result);
+                    if (res.success){
+        		console.log('Directory image replaced');
+        	    }
+                }});
+	});
 
     //folders
     
@@ -38,10 +59,19 @@ $(document).ready(function(){
 	    order=[];
 	    $( this ).find('li').each(function( index, value ) {
 		hr = $(value).find('a').attr('href');
-		arder[index]= hr.substr(8);
+		order[index]= hr.substr(8);
 	    });
 	    console.log(order);
 	    //ajax call with order here..
+	    	     $.ajax({
+                url: '/ajax/folderorder',
+	        data: 'order='+JSON.stringify(order),
+                success: function(result){
+        	    var res = $.parseJSON(result);
+                    if (res.success){
+        		console.log('folders reordered');
+        	    }
+                }});
 	    
 	}});
     $( "#folders" ).sortable("disable");
@@ -70,8 +100,6 @@ $(document).ready(function(){
 	form = $('#imageDescModal').find('form');
 	form.append('<input type="hidden" name="imageid" value="'+img.id+'" class="specatt">');
 	$('#imageDescModal .modal-header').append('<img src="'+img.thumbpath+'/thumb_'+img.imagename+'" class="specatt">');
-
-//	console.log(img);
 	
       $('#imageDescModal').modal('show');
     });

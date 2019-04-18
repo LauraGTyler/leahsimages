@@ -14,3 +14,7 @@
 Route::get('/', 'HomeController@RootFolder' );
 Route::get('folder/{id}', 'HomeController@folder');
 Route::post('/setRootFolder','HomeController@setRootFolder' );
+
+//ajax functions..
+Route::get('ajax/savedirectoryimage', 'AjaxController@savedirectoryimage');
+Route::get('ajax/folderorder', 'AjaxController@folderorder');

@@ -6,16 +6,18 @@
 
 
 @section('content')
+<div id="directoryimage">
 @if(!empty($folder->imagename))
 <div class="center">
-<img src="{{$folder->thumbpath}}/large_{{$folder->imagename}}" alt="{{$title}}" title="{{$title}}" />
+<img src="{{$folder->thumbpath}}/thumb_{{$folder->imagename}}" alt="{{$title}}" title="{{$title}}" />
 </div>
-<div class="center"><a id="changeimage">Change associeted folder image</a></div>
+  <?php $imagetext='Change associated folder image';?>
 @else
-<br />  
-<div class="center" id="addimagediv"><a id="addimage" data-toggle="modal" data-target="#imageAssocModal">Add/ accossiate folder image</a></div>  
+<?php $imagetext='Add/ accossiate folder image';?>
 @endif
-
+</div>
+<br />  
+  <div class="center" id="addimagediv"><a id="addimage" data-toggle="modal" data-target="#imageAssocModal">{{$imagetext}}</a></div>  
 
 <form>
   <input type="hidden" name="_token" value="{{ csrf_token() }}" />
@@ -44,7 +46,7 @@
   @foreach($childfolders as $cf)
   <li><br /><a href="/folder/{{$cf->id}}" alt="{{$cf->name}}" title="{{$cf->name}}">
   @if(!empty($cf->imagename))
-  <img src="{{$cf->thumbpath}}/{{$cf->imagename}}" alt="{{$cf->name}}" title="{{$cf->name}}"/>
+  <img src="{{$cf->thumbpath}}/thumb_{{$cf->imagename}}" alt="{{$cf->name}}" title="{{$cf->name}}"/>
   @else
    {{$cf->name}}
   @endif
