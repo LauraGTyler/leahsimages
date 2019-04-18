@@ -44,14 +44,17 @@
 <div class="center"><a id="reorderfolders">reorder folders</a><a id="savefolderorder"></a></div>
 <ul id="folders" class="clickable">
   @foreach($childfolders as $cf)
-  <li><br /><a href="/folder/{{$cf->id}}" alt="{{$cf->name}}" title="{{$cf->name}}">
+  <li><a href="/folder/{{$cf->id}}" alt="{{$cf->name}}" title="{{$cf->name}}">
   @if(!empty($cf->imagename))
   <?php
    $filename = pathinfo($cf->imagename, PATHINFO_FILENAME);
   ?>
   <img src="{{$cf->thumbpath}}/transparent_{{$filename}}.png" alt="{{$cf->name}}" title="{{$cf->name}}"/>
+  <br />
    {{$cf->name}}
   @else
+  <br />
+  <br />
    {{$cf->name}}
   @endif
   </a></li>

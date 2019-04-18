@@ -84,6 +84,7 @@ class ImageHelper
     
     $img= Image::make($thumbimage);
     $img->opacity(50);
+    $img->fit(160);
     $img->save($path_parts['dirname'].'/transparent_'.$filename.'.png');
 
 
