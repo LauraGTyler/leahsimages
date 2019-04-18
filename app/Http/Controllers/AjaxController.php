@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\folder;
 use App\limage;
+use App\Helpers\ImageHelper;
 
 class AjaxController extends Controller
 {
@@ -23,6 +24,9 @@ class AjaxController extends Controller
     $folder->imageid=$imageid;
     $folder->thumbpath=$limg->thumbpath;
     $folder->save();
+    //make transparent image
+    $ih = new ImageHelper();
+    $ih->make_transparent_image(public_path($limg->thumbpath.'/thumb_'.$limg->imagename));
     $return=new \stdClass();
     $return->success=true;
     return json_encode($return);

@@ -46,7 +46,11 @@
   @foreach($childfolders as $cf)
   <li><br /><a href="/folder/{{$cf->id}}" alt="{{$cf->name}}" title="{{$cf->name}}">
   @if(!empty($cf->imagename))
-  <img src="{{$cf->thumbpath}}/thumb_{{$cf->imagename}}" alt="{{$cf->name}}" title="{{$cf->name}}"/>
+  <?php
+   $filename = pathinfo($cf->imagename, PATHINFO_FILENAME);
+  ?>
+  <img src="{{$cf->thumbpath}}/transparent_{{$filename}}.png" alt="{{$cf->name}}" title="{{$cf->name}}"/>
+   {{$cf->name}}
   @else
    {{$cf->name}}
   @endif

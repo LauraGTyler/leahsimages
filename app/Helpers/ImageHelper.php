@@ -31,11 +31,22 @@ class ImageHelper
     $lastid=0;
     $existnames=array();
     foreach ($existing as $exists){
+      
       if (file_exists($folder->path.'/'.$exists->imagename) &&
 	  file_exists(public_path($exists->thumbpath.'/thumb_'.$exists->imagename))){
 	$lastid=$exists->id;
 	$existnames[]=strtolower($exists->imagename);
       }else{
+	$filename = pathinfo($exists->imagename, PATHINFO_FILENAME);
+	if(file_exists(public_path($exists->thumbpath.'/thumb_'.$exists->imagename))){
+	  unlink(public_path($exists->thumbpath.'/thumb_'.$exists->imagename));
+	}
+	if(file_exists(public_path($exists->thumbpath.'/large_'.$exists->imagename))){
+	  unlink(public_path($exists->thumbpath.'/large_'.$exists->imagename));
+	}
+	if(file_exists(public_path($exists->thumbpath.'/transparent_'.$filename.'.png'))){
+	  unlink(public_path($exists->thumbpath.'/transparent_'.$filename.'.png'));
+	}
 	$exists->delete();
       }
 	
@@ -57,12 +68,24 @@ class ImageHelper
 	mkdir(public_path($image->thumbpath),0777,true);
       //copy
       copy($file,public_path($image->thumbpath.'/large_'.$image->imagename));
-      echo 'hello world';
       //scale and copy the image to the thumbpath
       $img= Image::make($file);
       $img->fit(200);
       $img->save(public_path($image->thumbpath.'/thumb_'.$image->imagename));
     }
+
+  }
+
+
+
+  public function make_transparent_image($thumbimage){
+    $path_parts = pathinfo($thumbimage);
+    $filename = str_replace('thumb_','',$path_parts['filename']);
+    
+    $img= Image::make($thumbimage);
+    $img->opacity(50);
+    $img->save($path_parts['dirname'].'/transparent_'.$filename.'.png');
+
 
   }
  

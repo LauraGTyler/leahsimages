@@ -13,13 +13,8 @@ use App\Helpers\FolderHelper;
 class HomeController extends Controller
 {
 
-  public function helloworld(){
-    echo 'hello world';
-
-  }
-  
   public function folder($id){
-    $ih = new ImageHelper;
+    $ih = new ImageHelper();
     $fh = new FolderHelper();
     $newfolder = new folder();
     $newimage = new limage();
