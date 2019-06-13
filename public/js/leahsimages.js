@@ -12,9 +12,26 @@ function selectFolder(e) {
 
 
 $(document).ready(function(){
-    //summernote
-    $(document).ready(function() {
-      $('#summernote').summernote();
+
+	$('#summernote').summernote({
+	    height: 300,
+	});
+    
+    $('#imagenotes').summernote({
+	  height:300,
+	});
+
+    $('#savefolderatts').on('click',function(){
+	data=$('form#folderatts').serialize();
+	$.ajax({
+                url: '/ajax/savefolderatts',
+                 data: data,
+                success: function(result){
+        	    var res = $.parseJSON(result);
+                    if (res.success){
+        		console.log('Saved folderatts');
+        	    }
+                }});
     });
 
     
@@ -79,7 +96,9 @@ $(document).ready(function(){
     $('#reorderfolders').on('click', function(){
 	$(this).hide();
 	$('#savefolderorder').html("Save folder order");
-	$('#savefolderorder').show(); 
+	$('#savefolderorder').removeClass('hidden');
+	$('#savefolderorder').show();
+	
 	$('#folders').addClass('sortable');
 	$('#folders').removeClass('clickable')
 	$( "#folders" ).sortable("enable");
@@ -95,21 +114,38 @@ $(document).ready(function(){
 
     //images
    
-    $('#images.clickable li').on('click', function(){
-	img=$.parseJSON($(this).find('span.imageatts').text());
-	form = $('#imageDescModal').find('form');
-	form.append('<input type="hidden" name="imageid" value="'+img.id+'" class="specatt">');
-	$('#imageDescModal .modal-header').append('<img src="'+img.thumbpath+'/thumb_'+img.imagename+'" class="specatt">');
-	
-      $('#imageDescModal').modal('show');
+    $('#images li').on('click', function(){
+	if($(this).closest('ul').hasClass('clickable')){
+	    img=$.parseJSON($(this).find('span.imageatts').text());
+	    form = $('#imageDescModal').find('form');
+	    form.append('<input type="hidden" name="imageid" value="'+img.id+'" class="specatt">');
+	    $('#imagenotes').summernote('editor.pasteHTML', img.notes);
+	    $('#caption').val(img.caption);
+	    $('#imageDescModal .modal-header').append('<img src="'+img.thumbpath+'/thumb_'+img.imagename+'" class="specatt">');
+	    $('#imageDescModal').modal('show');
+	  }
     });
     imageDescModalhtml =$('#imageDescModal').html();
 
     $('#imageDescModal').on('hidden.bs.modal', function (e) {
+	$('#imagenotes').summernote('reset');
+
 	$('#imageDescModal .specatt').remove();
     });
 	
-
+   $('#saveimgatts').on('click',function(){
+	data=$('form#imgatts').serialize();
+	$.ajax({
+                url: '/ajax/saveimageatts',
+                 data: data,
+                success: function(result){
+        	    var res = $.parseJSON(result);
+                    if (res.success){
+        		console.log('Saved imgatts');
+        	    }
+		    $('#imageDescModal').modal('hide');
+                }});
+    });
 
 
 
@@ -118,8 +154,21 @@ $(document).ready(function(){
 	    order=[];
 	    $( this ).find('li').each(function( index, value ) {
 		//get the id we are sorting
+		img=$.parseJSON($(value).find('span.imageatts').text());
+		order[index]= img.id;
 	    });
-	    //ajax call with order
+	    // console.log(order);
+	    //ajax call with order here..
+	   $.ajax({
+                url: '/ajax/imageorder',
+	        data: 'order='+JSON.stringify(order),
+                success: function(result){
+        	    var res = $.parseJSON(result);
+                    if (res.success){
+        		console.log('images reordered');
+        	    }
+		    }});
+
 	    
 	}});
     $( "#images" ).sortable("disable");
@@ -127,9 +176,11 @@ $(document).ready(function(){
     $('#reorderimages').on('click', function(){
 	$(this).hide();
 	$('#saveimageorder').html("Save image order");
+	$('#saveimageorder').removeClass('hidden');
 	$('#saveimageorder').show(); 
 	$('#images').addClass('sortable');
-	$('#images').removeClass('clickable')
+	$('#images').removeClass('clickable');
+	    
 	$( "#images" ).sortable("enable");
 				
     });
@@ -139,7 +190,9 @@ $(document).ready(function(){
 	$( "#images" ).sortable("disable");
 	$('#images').removeClass('sortable');
 	$('#images').addClass('clickable');
+	
     });
+	
 
     
 });

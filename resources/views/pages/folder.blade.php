@@ -19,7 +19,7 @@
 <br />  
   <div class="center" id="addimagediv"><a id="addimage" data-toggle="modal" data-target="#imageAssocModal">{{$imagetext}}</a></div>  
 
-<form>
+<form id="folderatts">
   <input type="hidden" name="_token" value="{{ csrf_token() }}" />
   <input type="hidden" name="folderid" value="{{$folder->id}}" />
    <div class="form-group row">
@@ -36,37 +36,38 @@
   </div>
   <div class="form-group row">
   <div class="col-sm-2"></div>
-  <div class="col-sm-4"><button type="button">Save</button></div>
+  <div class="col-sm-4"><button type="button" class="btn btn-info" id="savefolderatts">Save</button></div>
   </div>
 </form>
 
 <h2 class="center">Folders</h2>
-<div class="center"><a id="reorderfolders">reorder folders</a><a id="savefolderorder"></a></div>
+<div class="center"><a class="button btn btn-info" id="reorderfolders">reorder folders</a><a class="hidden button btn btn-info" id="savefolderorder"></a></div>
 <ul id="folders" class="clickable">
   @foreach($childfolders as $cf)
-  <li><a href="/folder/{{$cf->id}}" alt="{{$cf->name}}" title="{{$cf->name}}">
+  <li><a href="/folder/{{$cf->id}}" alt="{{$cf->display_name}}" title="{{$cf->display_name}}">
   @if(!empty($cf->imagename))
   <?php
    $filename = pathinfo($cf->imagename, PATHINFO_FILENAME);
   ?>
-  <img src="{{$cf->thumbpath}}/transparent_{{$filename}}.png" alt="{{$cf->name}}" title="{{$cf->name}}"/>
+  <img src="{{$cf->thumbpath}}/transparent_{{$filename}}.png" alt="{{$cf->display_name}}" title="{{$cf->display_name}}"/>
   <br />
-   {{$cf->name}}
+   {{$cf->display_name}}
   @else
   <br />
   <br />
-   {{$cf->name}}
+   {{$cf->display_name}}
   @endif
   </a></li>
   @endforeach
 </ul>
 <h2 class="center">Images</h2>
-<div class="center"><a id="reorderimages">reorder images</a><a id="saveimageorder"></a></div>
+<div class="center"><a class="button btn btn-info" id="reorderimages">reorder images</a><a class="button btn btn-info hidden" id="saveimageorder"></a></div>
 <ul id="images" class="clickable">
   @foreach($images as $img)
   <li>
   <span class="hidden imageatts">{{json_encode($img)}}</span>
   <img src="{{$img->thumbpath}}/thumb_{{$img->imagename}}" alt="{{$img->caption}}" title="{{$img->caption}}"/>
+  <span class="caption">{{$img->caption}}</div>
   </li>
   @endforeach
 </ul>
@@ -137,7 +138,7 @@
 </div>
 <div class="modal-body">
 
-<form class="form">
+<form class="form" id="imgatts">
   <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 <div class="form-group row">
     <label for="caption" class="col-sm-2 control-label">Caption:</label>
@@ -153,7 +154,7 @@
   </div>
   <div class="form-group row">
   <div class="col-sm-2"></div>
-  <div class="col-sm-4"><button type="button">Save</button></div>
+  <div class="col-sm-4"><button type="button" id="saveimgatts">Save</button></div>
   </div>
 </form>
 <!--end modal-footer--></div>

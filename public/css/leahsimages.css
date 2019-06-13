@@ -9,11 +9,7 @@
 #images li { margin: 20px 20px 20px 0; padding: 1px;float:left;width: 20%; height: 220px; font-size: 3em; text-align:center; }
 #images:after{clear:left;}
 #images li:hover{border:10px solid black;}
-#reorderfolders:hover{border:10px solid black;}
-#savefolderorder:hover{border:10px solid black;}
-#reorderimages:hover{border:10px solid black;}
 #addimagediv{margin-bottom:2em;}
-#addimage:hover{border:10px solid black;}
 p{clear:left;}
 h2{clear:left;}
 .modal-backdrop.in{
@@ -31,5 +27,5 @@ form{ margin-left:2em;}
 
 a, a:hover, a:focus, a:active {
       text-decoration: none;
-      color: inherit;
+      
  }

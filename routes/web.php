@@ -17,7 +17,11 @@ Route::post('/setRootFolder','HomeController@setRootFolder' );
 
 //ajax functions..
 Route::get('ajax/savedirectoryimage', 'AjaxController@savedirectoryimage');
+Route::get('ajax/savefolderatts', 'AjaxController@savefolderatts');
 Route::get('ajax/folderorder', 'AjaxController@folderorder');
+Route::get('ajax/imageorder', 'AjaxController@imageorder');
+Route::get('/ajax/saveimageatts', 'AjaxController@saveimageatts');
+
 
 //test function
 Route::get('lauraistesting', 'ServerController@lauraistesting' );

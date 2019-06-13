@@ -20,12 +20,12 @@ class HomeController extends Controller
     $newimage = new limage();
     $folder = $newfolder->find($id);
     $ih->addchildimages($folder);
-    $images =$newimage->where('folder','=', $id)->get();
+    $images =$newimage->where('folder','=', $id)->orderby('imageorder','ASC')->get();
     $fh->addchildfolders($folder);
     $childfolders=$newfolder->where('parent','=', $id)->orderby('folderorder','ASC')->get();
     $trail=$fh->trail($folder);
     $atts =array('folder'=>$folder,
-		 'title'=>$folder->name,
+		 'title'=>$folder->display_name,
 		 'childfolders'=> $childfolders,
 		 'trail'=> $trail,
 		 'images'=>$images);
