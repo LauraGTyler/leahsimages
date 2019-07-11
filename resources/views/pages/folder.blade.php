@@ -64,10 +64,10 @@
 <div class="center"><a class="button btn btn-info" id="reorderimages">reorder images</a><a class="button btn btn-info hidden" id="saveimageorder"></a></div>
 <ul id="images" class="clickable">
   @foreach($images as $img)
-  <li>
+  <li id="imageli{{$img->id}}">
   <span class="hidden imageatts">{{json_encode($img)}}</span>
   <img src="{{$img->thumbpath}}/thumb_{{$img->imagename}}" alt="{{$img->caption}}" title="{{$img->caption}}"/>
-  <span class="caption">{{$img->caption}}</div>
+  <div class="caption">{{$img->caption}}</div>
   </li>
   @endforeach
 </ul>

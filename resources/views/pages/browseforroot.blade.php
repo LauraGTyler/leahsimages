@@ -12,8 +12,8 @@
   @csrf
    <div class="form-group">
       <label for="rootfolder" class="col-sm-2 control-label">Root Folder:</label>
-      <div class="col-sm-4">
-          <input type="text" name="rootFolder" size="80" required="required" />
+      <div class="col-sm-8">
+          <input type="text" name="rootFolder" size="70" required="required" />
       </div>
     </div>
   <div class="form-group">

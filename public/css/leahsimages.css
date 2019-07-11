@@ -9,6 +9,7 @@
 #images li { margin: 20px 20px 20px 0; padding: 1px;float:left;width: 20%; height: 220px; font-size: 3em; text-align:center; }
 #images:after{clear:left;}
 #images li:hover{border:10px solid black;}
+#images li div.caption{font-size: 0.5em; margin-bottom: 1em;}
 #addimagediv{margin-bottom:2em;}
 p{clear:left;}
 h2{clear:left;}

@@ -62,6 +62,7 @@ class ImageHelper
       $lastid++;
       $image->imageorder =$lastid;
       $image->thumbpath ='/images/folders/'.$folder->id;
+      $image->caption = $image->imagename;
       $image->save();
       //make the thumb path if it doesnt exist
       if(!file_exists(public_path($image->thumbpath)))

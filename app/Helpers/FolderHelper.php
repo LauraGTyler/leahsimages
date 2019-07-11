@@ -37,6 +37,7 @@ class FolderHelper
       $fdr->folderorder =$lastid;
       $fdr->path =$folder->path.'/'.$fdr->name;
       $fdr->parent=$folder->id;
+      $fdr->display_name=$fdr->name;
       
       $fdr->save();
     }

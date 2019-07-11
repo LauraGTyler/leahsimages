@@ -108,6 +108,8 @@ class AjaxController extends Controller
      $image->notes=$request->query('note');
      $image->save();
     $return->success=true;
+    $return->imageli=view('partials.imageli', ['img'=>$image])->render();
+    $return->imageid=$image->id;
     return json_encode($return);
     
 

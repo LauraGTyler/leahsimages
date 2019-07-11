@@ -10,6 +10,24 @@ function selectFolder(e) {
     alert(s);
 }
 
+function imagesclick(){
+    if($(this).closest('ul').hasClass('clickable')){
+	img=$.parseJSON($(this).find('span.imageatts').text());
+	form = $('#imageDescModal').find('form');
+	form.append('<input type="hidden" name="imageid" value="'+img.id+'" class="specatt">');
+	if(img.notes==null || img.notes==''){
+	    img.notes='';
+	    $('#imagenotes').summernote('reset');
+	}else{
+	    $('#imagenotes').summernote('reset');
+	    $('#imagenotes').summernote('pasteHTML', img.notes);
+	}
+	$('#caption').val(img.caption);
+	$('#imageDescModal .modal-header').append('<img src="'+img.thumbpath+'/thumb_'+img.imagename+'" class="specatt">');
+	$('#imageDescModal').modal('show');
+	
+    }
+}
 
 $(document).ready(function(){
 
@@ -114,17 +132,8 @@ $(document).ready(function(){
 
     //images
    
-    $('#images li').on('click', function(){
-	if($(this).closest('ul').hasClass('clickable')){
-	    img=$.parseJSON($(this).find('span.imageatts').text());
-	    form = $('#imageDescModal').find('form');
-	    form.append('<input type="hidden" name="imageid" value="'+img.id+'" class="specatt">');
-	    $('#imagenotes').summernote('editor.pasteHTML', img.notes);
-	    $('#caption').val(img.caption);
-	    $('#imageDescModal .modal-header').append('<img src="'+img.thumbpath+'/thumb_'+img.imagename+'" class="specatt">');
-	    $('#imageDescModal').modal('show');
-	  }
-    });
+    $('#images li').on('click', imagesclick);
+    
     imageDescModalhtml =$('#imageDescModal').html();
 
     $('#imageDescModal').on('hidden.bs.modal', function (e) {
@@ -141,7 +150,9 @@ $(document).ready(function(){
                 success: function(result){
         	    var res = $.parseJSON(result);
                     if (res.success){
-        		console.log('Saved imgatts');
+			$('#imageli'+res.imageid).replaceWith(res.imageli);
+			$('#imageli'+res.imageid).on('click', imagesclick);
+        		console.log('Saved imgatts and updated page');
         	    }
 		    $('#imageDescModal').modal('hide');
                 }});

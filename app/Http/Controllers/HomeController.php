@@ -61,6 +61,7 @@ class HomeController extends Controller
       $name=array_pop($parts);
     }
     $fdr->name=$name;
+    $fdr->display_name=$name;
     //check if exists
     $exists = $exists->where('name','=',$name)
       ->where('path','=',$rootFolder)->first();
