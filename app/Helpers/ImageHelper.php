@@ -90,6 +90,24 @@ class ImageHelper
 
 
   }
+
+  public function rotateimage($img, $angle){
+    
+     if (file_exists(public_path($img->thumbpath.'/thumb_'.$img->imagename))){
+	$image = Image::make($img->thumbpath.'/thumb_'.$img->imagename);
+	$image->rotate($angle);
+     }
+	
+     if(file_exists(public_path($img->thumbpath.'/large_'.$img->imagename))){
+       $image = Image::make($img->thumbpath.'/thumb_'.$img->imagename);
+       $image->rotate($angle);
+     }
+     if(file_exists(public_path($img->thumbpath.'/transparent_'.$filename.'.png'))){
+       $image = Image::make($img->thumbpath.'/thumb_'.$img->imagename);
+       $image->rotate($angle);
+     }
+
+  }
  
 }
 ?>

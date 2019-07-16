@@ -156,6 +156,12 @@ $(document).ready(function(){
         	    }
 		    $('#imageDescModal').modal('hide');
                 }});
+   });
+    $('#imgrotate').on('click',function(){
+	angle=parseInt($('#imgangle').val());
+	angle += 90;
+	$('#imgrotate').next('img').rotate(angle);
+	$('#imgangle').val(angle);
     });
 
 

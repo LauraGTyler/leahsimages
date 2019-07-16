@@ -135,11 +135,14 @@
 <div class="modal-header">
 <h3>Image Attributes</h3>
 <button type="button" class="close" data-dismiss="modal" title="Close"> <span class="glyphicon glyphicon-remove"></span></button>
+
+<button type="button" title="Rotate clockways" id="imgrotate"> Rotate <span class="glyphicon glyphicon-refresh"></span></button>
 </div>
 <div class="modal-body">
 
 <form class="form" id="imgatts">
   <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+  <input type="hidden" name="angle" id="imgangle" value="0" />
 <div class="form-group row">
     <label for="caption" class="col-sm-2 control-label">Caption:</label>
     <div class="col-sm-8">

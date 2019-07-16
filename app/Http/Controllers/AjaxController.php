@@ -93,6 +93,7 @@ class AjaxController extends Controller
  public function saveimageatts(Request $request){
 
      $imageid=$request->query('imageid');
+     $angle=(int) $request->query('angle');
      $image=new limage;
      $image= $image->find($imageid);
   
@@ -107,6 +108,11 @@ class AjaxController extends Controller
      $image->caption=$request->query('caption');
      $image->notes=$request->query('note');
      $image->save();
+     if ($angle > 0){
+       $Ih = new ImageHelper;
+       $Ih->rotateimage($image, $angle);
+       
+     }
     $return->success=true;
     $return->imageli=view('partials.imageli', ['img'=>$image])->render();
     $return->imageid=$image->id;
