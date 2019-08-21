@@ -70,7 +70,7 @@ class ImageHelper
       //copy
       copy($file,public_path($image->thumbpath.'/large_'.$image->imagename));
       //scale and copy the image to the thumbpath
-      $img= Image::make($file);
+      $img= Image::make($file)->orientate();
       $img->fit(200);
       $img->save(public_path($image->thumbpath.'/thumb_'.$image->imagename));
     }
@@ -92,19 +92,23 @@ class ImageHelper
   }
 
   public function rotateimage($img, $angle){
-    
-     if (file_exists(public_path($img->thumbpath.'/thumb_'.$img->imagename))){
-	$image = Image::make($img->thumbpath.'/thumb_'.$img->imagename);
-	$image->rotate($angle);
+    $imgppath=public_path($img->thumbpath.'/thumb_'.$img->imagename);
+     if (file_exists($imgppath)){
+	$image = Image::make($imgppath);
+	$image->rotate(-$angle);
+        $image->save($imgppath);
      }
-	
-     if(file_exists(public_path($img->thumbpath.'/large_'.$img->imagename))){
-       $image = Image::make($img->thumbpath.'/thumb_'.$img->imagename);
-       $image->rotate($angle);
+     $imgppath=public_path($img->thumbpath.'/large_'.$img->imagename);	
+     if(file_exists($imgppath)){
+       $image = Image::make($imgppath);
+       $image->rotate(-$angle);
+       $image->save($imgppath);
      }
-     if(file_exists(public_path($img->thumbpath.'/transparent_'.$filename.'.png'))){
-       $image = Image::make($img->thumbpath.'/thumb_'.$img->imagename);
-       $image->rotate($angle);
+     $imgppath=public_path($img->thumbpath.'/transparent_'.$img->imagename);  
+     if(file_exists($imgppath)){
+       $image = Image::make($imgppath);
+       $image->rotate(-$angle);
+       $image->save($imgppath);
      }
 
   }
