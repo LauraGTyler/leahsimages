@@ -96,7 +96,7 @@ $(document).ready(function(){
 		hr = $(value).find('a').attr('href');
 		order[index]= hr.substr(8);
 	    });
-	    console.log(order);
+	    //console.log(order);
 	    //ajax call with order here..
 	    	     $.ajax({
                 url: '/ajax/folderorder',

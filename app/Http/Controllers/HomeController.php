@@ -12,6 +12,7 @@ use App\Helpers\FolderHelper;
 
 class HomeController extends Controller
 {
+  
 
   public function folder($id){
     $ih = new ImageHelper();
@@ -35,6 +36,24 @@ class HomeController extends Controller
 
   }
 
+  public function addimagetofolder($id){
+
+    $folder=new folder();
+    $folder=$folder->find($id);
+    $tmpname=$_FILES['image']['tmp_name'];
+    if (!empty($tmpname)){
+      $what = getimagesize($tmpname);
+      $mime = strtolower($what['mime']);
+      if ($mime=='image/gif'||$mime=='image/jpeg'||$mime=='image/png'||$mime=='image/bmp'){
+	$filename = $_FILES['image']['name'];
+	//just add it to the root folder, the 'folder' function will render it...
+	move_uploaded_file($tmpname, $folder->path.'/'.$filename);
+      }
+    }
+    
+    return redirect(url('folder/'.$id));
+  }
+
   public function RootFolder(Request $request){
     $fh = new FolderHelper();
     $rf = new rootfolder();
@@ -42,7 +61,7 @@ class HomeController extends Controller
     if (empty($rf)){
       return view('pages.browseforroot',array('title'=>'Unknown root folder' ));
     }else{
-      return redirect(url('/folder/'.$rf->folderid));
+      return redirect(url('folder/'.$rf->folderid));
      }
   }
 

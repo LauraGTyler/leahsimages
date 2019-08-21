@@ -13,6 +13,7 @@
 
 Route::get('/', 'HomeController@RootFolder' );
 Route::get('folder/{id}', 'HomeController@folder');
+Route::post('folder/{id}','HomeController@addimagetofolder');
 Route::post('/setRootFolder','HomeController@setRootFolder' );
 
 //ajax functions..

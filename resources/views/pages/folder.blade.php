@@ -13,7 +13,7 @@
 </div>
   <?php $imagetext='Change associated folder image';?>
 @else
-<?php $imagetext='Add/ accossiate folder image';?>
+<?php $imagetext='Accossiate folder image';?>
 @endif
 </div>
 <br />  
@@ -61,6 +61,16 @@
   @endforeach
 </ul>
 <h2 class="center">Images</h2>
+     <form class="form-horizontal" enctype="multipart/form-data" method="post" action="{{Request::url()}}" style="clear:left;margin-top:2em;">
+   <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+  <div class="form-group">      
+  <label for="image" class="col-sm-2 control-label">Upload Image or (td) drag below</label>
+        <div class="col-sm-10"> 
+            <input type="file" class="form-control" name="image" id="image" accept="image/*" style="display:inline;width:80%;" />
+            <input id="addtofolder" type="submit" name="Add" class="btn btn-primary"></input>
+        </div>
+    </div>  
+ </form>
 <div class="center"><a class="button btn btn-info" id="reorderimages">reorder images</a><a class="button btn btn-info hidden" id="saveimageorder"></a></div>
 <ul id="images" class="clickable">
   @foreach($images as $img)
@@ -72,6 +82,7 @@
   @endforeach
 </ul>
 
+ 
  <!--begin modal window-->
 <div class="modal fade" id="imageAssocModal">
 <div class="modal-dialog">
@@ -112,18 +123,6 @@
 <!--Begin Previous and Next buttons-->
 <button type="button" id="caroselleft" style="clear:left;float:left;"><span class="glyphicon glyphicon-chevron-left"></span></button>
 <button type="button" id="caroselright"><span class="glyphicon glyphicon-chevron-right"></span></button>
-
-
-    <form class="form-horizontal" style="clear:left;margin-top:2em;">
-   <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-  <div class="form-group">      
-        <label for="image" class="col-sm-2 control-label">Upload Image</label>
-        <div class="col-sm-10"> 
-            <input type="file" class="form-control" name="image" id="image" accept="image/*" style="display:inline;width:80%;" />
-            <button id="addtogallery" type="button" class="btn btn-primary">Add</button>
-        </div>
-    </div>  
- </form>
 <!--end modal-footer--></div>
 <!--end modal-content--></div>
 <!--end modal-dialoge--></div>
