@@ -29,4 +29,5 @@ form{ margin-left:2em;}
 a, a:hover, a:focus, a:active {
       text-decoration: none;
       
- }
+}
+#uploadfile{ margin: 20px 20px 20px 20px; padding: 1px;float:left;width: 20%; height: 220px; font-size: 2em; text-align:center; }

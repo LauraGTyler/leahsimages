@@ -61,17 +61,18 @@
   @endforeach
 </ul>
 <h2 class="center">Images</h2>
-     <form class="form-horizontal" enctype="multipart/form-data" method="post" action="{{Request::url()}}" style="clear:left;margin-top:2em;">
-   <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-  <div class="form-group">      
-  <label for="image" class="col-sm-2 control-label">Upload Image or (td) drag below</label>
-        <div class="col-sm-10"> 
-            <input type="file" class="form-control" name="image" id="image" accept="image/*" style="display:inline;width:80%;" />
-            <input id="addtofolder" type="submit" name="Add" class="btn btn-primary"></input>
+  <div class="center"><a class="button btn btn-info" id="reorderimages">reorder images</a><a class="button btn btn-info hidden" id="saveimageorder"></a></div>
+    {{-- //do do here lauraistesting again --}}
+  	  <input type="file" name="file" id="file">
+	  @csrf
+         <input type="hidden" name="folder" value="{{$folder->id}}" >   
+            <!-- Drag and Drop container-->
+            <div class="upload-area"  id="uploadfile">
+                <p>Add an Image:<br><small>Drag and Drop file here<br>Or<br>Click to select file</small></p>
+            </div>
         </div>
-    </div>  
- </form>
-<div class="center"><a class="button btn btn-info" id="reorderimages">reorder images</a><a class="button btn btn-info hidden" id="saveimageorder"></a></div>
+
+
 <ul id="images" class="clickable">
   @foreach($images as $img)
   <li id="imageli{{$img->id}}">

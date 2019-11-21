@@ -22,7 +22,7 @@ Route::get('ajax/savefolderatts', 'AjaxController@savefolderatts');
 Route::get('ajax/folderorder', 'AjaxController@folderorder');
 Route::get('ajax/imageorder', 'AjaxController@imageorder');
 Route::get('/ajax/saveimageatts', 'AjaxController@saveimageatts');
-
+Route::post('/uploadfile', 'AjaxController@uploadfile');
 
 //test function
 Route::get('lauraistesting', 'ServerController@lauraistesting' );

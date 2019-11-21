@@ -121,5 +121,46 @@ class AjaxController extends Controller
 
   }
   
+ public function uploadfile(Request $request){
+    //to do here get the thumbnail and return it.. images library..
+    $folder = $request->input('folder');
+    $newfolder = new folder();
+    $newfolder = $newfolder->find($folder);
+    
+    /* Getting file name */
+    $filename = $_FILES['file']['name'];
+    $nfilename=$this->rnonc($filename);
+    /*strip spaces and non url characters*/
+
+    /* Getting File size */
+    $filesize = $_FILES['file']['size'];
+
+    /* Location */
+    //$location = public_path("images/folders/".$folder.'/'.$nfilename);
+    $location = $newfolder->path.'/'.$filename;
+
+    $return_arr = array();
+
+    /* Upload file */
+    if(move_uploaded_file($_FILES['file']['tmp_name'],$location)){
+      $return_arr = array("success"=>true,"name" => $filename,"size" => $filesize, "location"=> $location);
+    }
+
+    echo json_encode($return_arr);
+
+
+  }
+
+
+   //remove non url chars from name
+  //from https://stackoverflow.com/questions/7568231/php-remove-url-not-allowed-characters-from-string
+  private function rnonc($url) {
+   $url = preg_replace('~[^\\pL0-9_]+~u', '-', $url);
+   $url = trim($url, "-");
+   $url = iconv("utf-8", "us-ascii//TRANSLIT", $url);
+   $url = strtolower($url);
+   $url = preg_replace('~[^-a-z0-9_]+~', '', $url);
+   return $url;
+}
 
 }

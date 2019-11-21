@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="/css/jquery-ui.css" />
   <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" />
   <link href="/css/summernote.css" rel="stylesheet" />
+  <link href="/css/filedragdrop.css" rel="stylesheet" />
   <link rel="stylesheet" href="/css/leahsimages.css" />
   <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   
@@ -18,9 +19,10 @@
 
 <script src="/js/jquery-1.12.4.js"></script>
 <script src="/js/jquery-rotate.min.js"></script>
-  <script src="/js/jquery-ui.js"></script>
+<script src="/js/jquery-ui.js"></script>
 <script src="/js/summernote.js"></script>
 <script src="/js/bootstrapmin.js"></script>
+<script src="/js/filedragdrop.js"></script>
 <script src="/js/leahsimages.js"></script>
 </body>
 </html>
